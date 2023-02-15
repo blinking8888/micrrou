@@ -22,15 +22,11 @@ where
 }
 
 pub fn chance(probability: f32) -> bool {
-    if probability < 0.0 || probability > 100.0 {
+    if !(0.0..=100.0).contains(&probability) {
         eprintln!("This is impossible ({}% !!!", probability);
         false
     } else {
         let probability = probability / 100.0;
-        if random::<f32>() < probability {
-            true
-        } else {
-            false
-        }
+        random::<f32>() < probability
     }
 }

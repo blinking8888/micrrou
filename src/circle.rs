@@ -35,11 +35,7 @@ impl Circle {
     pub fn overlaps_another(&self, other: &Self) -> bool {
         let distance = self.center.distance(other.center);
         let radii = self.radius + other.radius + self.stroke_weight + other.stroke_weight;
-        if distance >= radii {
-            false
-        } else {
-            true
-        }
+        distance < radii
     }
 
     pub fn is_on_edge(&self, xmax: f32, ymax: f32) -> bool {

@@ -75,7 +75,7 @@ impl ConcentriGon {
             //1        }
             let pt_dec = Point2::new(addx, -addy);
             let new_location = self.location() + pt_dec;
-            let mut attrs = self.attrs.clone();
+            let mut attrs = self.attrs;
             attrs.set_location(new_location).set_height(h).set_width(w);
 
             Some(Self {

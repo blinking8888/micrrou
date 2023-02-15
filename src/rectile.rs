@@ -59,10 +59,10 @@ impl Rectile {
 
     pub fn draw_all(me: &Self, draw: &Draw) {
         let r = ConcentriGon::from(me);
-        ConcentriGon::draw_all(r, &draw);
+        ConcentriGon::draw_all(r, draw);
         if let Some(divs) = me.divs() {
             for fractal in divs.iter() {
-                Self::draw_all(fractal, &draw);
+                Self::draw_all(fractal, draw);
             }
         }
     }
