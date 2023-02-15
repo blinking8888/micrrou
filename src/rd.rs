@@ -273,9 +273,9 @@ impl Mixture {
             if let Some(cell) = iter.next() {
                 if let Some(cells3x3) = Cell3x3::<Cell>::from_mixture_at_xy(values, x, y) {
                     let rdk = k_iter.next().unwrap();
-                    Self::react_and_diffuse(&cells3x3, conv3x3, &rdk)
+                    Self::react_and_diffuse(&cells3x3, conv3x3, rdk)
                 } else {
-                    cell.clone()
+                    *cell
                 }
             } else {
                 eprintln!("Something's not right!");
@@ -310,7 +310,7 @@ impl PetriDish {
     where
         F: Fn(usize, usize) -> Cell,
     {
-        self.buf1.populate(|x, y| seed_fn(x, y));
+        self.buf1.populate(seed_fn);
         self.buf2.cells = self.buf1.cells.clone();
         self
     }
@@ -319,7 +319,7 @@ impl PetriDish {
     where
         F: Fn(usize, usize) -> ReactionDiffusionRates,
     {
-        self.buf1.populate_constants(|x, y| seed_fn(x, y));
+        self.buf1.populate_constants(seed_fn);
         self.buf2.rdks = self.buf1.rdks.clone();
         self
     }
@@ -346,7 +346,7 @@ impl PetriDish {
         self.get_current_buffer().cells.iter()
     }
 
-    fn get_current_buffer<'a>(&'a self) -> &'a Mixture {
+    fn get_current_buffer(&self) -> &Mixture {
         if self.index == 0 {
             &self.buf1
         } else {

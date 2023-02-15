@@ -85,10 +85,10 @@ impl NoiseLoopMap {
         map_range(value, self.min, self.max, out_min, out_max)
     }
 
-    fn get_info<N: NoiseFn<[f64; 3]>>(mut noise_loop_iter: NoiseLoopIter<N>) -> (f64, f64) {
+    fn get_info<N: NoiseFn<[f64; 3]>>(noise_loop_iter: NoiseLoopIter<N>) -> (f64, f64) {
         let mut min = 0.0;
         let mut max = 0.0;
-        while let Some(nv) = noise_loop_iter.next() {
+        for nv in noise_loop_iter {
             if nv < min {
                 min = nv;
             }

@@ -125,7 +125,7 @@ pub trait SettableAttributes {
 #[cfg(test)]
 mod test {
     use super::*;
-    use nannou::prelude::*;
+    
 
     struct Object {
         attrs: Attributes,

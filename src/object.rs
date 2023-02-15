@@ -60,10 +60,6 @@ impl Object {
 
         let x = self.points[0].x;
         let y = self.points[0].y;
-        if x < x_lower || x > x_upper || y < y_lower || y > y_upper {
-            true
-        } else {
-            false
-        }
+        x < x_lower || x > x_upper || y < y_lower || y > y_upper
     }
 }
