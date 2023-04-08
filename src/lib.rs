@@ -4,7 +4,7 @@
 
 /// Module that deals with the drawings and the canvas
 pub mod draw;
-/// Module to easily setup an application given a [Model]
+/// Module to easily setup an application given a [setup::Model]
 pub mod setup;
 
 pub use draw::Drawable;
