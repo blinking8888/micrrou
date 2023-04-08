@@ -39,12 +39,12 @@ impl Canvas {
     /// Width of the canvas
     pub fn width(&self) -> u32 {
         let Width(w) = self.w;
-        u32::try_from(w).unwrap()
+        w
     }
 
     /// Height of the canvas
     pub fn height(&self) -> u32 {
         let Height(h) = self.h;
-        h as u32
+        h
     }
 }
