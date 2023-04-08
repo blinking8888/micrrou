@@ -1,5 +1,4 @@
-use micrrou::draw::*;
-use micrrou::setup::*;
+use micrrou::prelude::*;
 
 struct MyModel {
     canvas: Canvas,
