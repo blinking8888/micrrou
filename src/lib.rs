@@ -7,5 +7,8 @@ pub mod draw;
 /// Module to easily setup an application given a [setup::Model]
 pub mod setup;
 
-pub use draw::Drawable;
-pub use setup::setup;
+/// Typical symbols that you'd want to include from this crate
+pub mod prelude {
+    pub use crate::draw::{self, *};
+    pub use crate::setup::{self, *};
+}
