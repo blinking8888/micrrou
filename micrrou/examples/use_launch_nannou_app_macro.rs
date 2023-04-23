@@ -1,4 +1,4 @@
-use macrrou::launch_nannou_app;
+use micrrou::launch_nannou_app;
 use micrrou::{nannou_app::Model, prelude::Drawable};
 
 struct ModelData {

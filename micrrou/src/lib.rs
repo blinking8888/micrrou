@@ -13,3 +13,6 @@ pub mod prelude {
     pub use crate::draw::{self, *};
     pub use crate::nannou_app::{self, *};
 }
+
+#[cfg(feature = "macro")]
+pub use macrrou::launch_nannou_app;
