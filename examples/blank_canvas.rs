@@ -1,7 +1,6 @@
 use micrrou::prelude::*;
 
 struct MyModel {
-    canvas: Canvas,
     drawings: Vec<Box<dyn Drawable>>,
     frame_count: usize,
 }
@@ -9,7 +8,6 @@ struct MyModel {
 impl Model for MyModel {
     fn create() -> Self {
         Self {
-            canvas: Canvas::new(Width(900), Height(900)),
             drawings: Vec::new(),
             frame_count: 0,
         }
@@ -23,12 +21,8 @@ impl Model for MyModel {
         self.frame_count += 1;
         println!("frame count: {}", self.frame_count);
     }
-
-    fn canvas(&self) -> &Canvas {
-        &self.canvas
-    }
 }
 
 pub fn main() {
-    setup::<MyModel>();
+    nannou_app::launch::<MyModel, 900, 900>();
 }

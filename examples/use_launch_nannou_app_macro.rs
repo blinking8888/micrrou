@@ -1,19 +1,14 @@
 use macrrou::launch_nannou_app;
-use micrrou::{
-    prelude::{Canvas, Drawable, Height, Width},
-    setup::Model,
-};
+use micrrou::{nannou_app::Model, prelude::Drawable};
 
 struct ModelData {
     drawings: Vec<Box<dyn Drawable>>,
-    canvas: Canvas,
 }
 
 impl Default for ModelData {
     fn default() -> Self {
         Self {
             drawings: Vec::new(),
-            canvas: Canvas::new(Width(900), Height(900)),
         }
     }
 }
@@ -28,10 +23,6 @@ impl Model for ModelData {
     }
 
     fn update(&mut self) {}
-
-    fn canvas(&self) -> &Canvas {
-        &self.canvas
-    }
 }
 
 pub fn main() {
