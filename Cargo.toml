@@ -11,9 +11,13 @@ readonly = "0.2"
 ang = "0.5.0"
 rand = "0.8"
 num-traits = "0.2.15"
+macrrou = { version = "0.1.0", path = "./macrrou" }
 
 [dev-dependencies]
 test-case = "1.1.0"
 
 [[example]]
 name = "blank_canvas"
+
+[[example]]
+name = "use_launch_nannou_app_macro"
