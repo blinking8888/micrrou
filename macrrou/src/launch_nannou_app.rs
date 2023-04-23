@@ -75,37 +75,7 @@ impl NannouApp {
         let width = self.width;
         let height = self.height;
         quote! {
-
-            fn create_model(app: &nannou::app::App) -> #model
-            {
-                app.new_window()
-                    .title(app.exe_name().unwrap())
-                    .size(#width, #height)
-                    .view(view)
-                    .build()
-                    .unwrap();
-
-                #model::default()
-            }
-
-            fn view(app: &nannou::app::App, model: &#model, frame: nannou::frame::Frame)
-            {
-                use micrrou::nannou_app::Model;
-
-                let draw = app.draw();
-                for object in model.get_drawings() {
-                    object.draw(&draw);
-                }
-
-                draw.to_frame(app, &frame).unwrap();
-            }
-
-            fn update(_app: &nannou::app::App, model: &mut #model, _update: nannou::event::Update)
-            {
-                model.update();
-            }
-
-            nannou::app(create_model).update(update).run();
+            micrrou::nannou_app::launch::<#model, #width, #height>();
         }
     }
 }
