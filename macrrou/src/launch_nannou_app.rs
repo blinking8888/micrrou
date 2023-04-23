@@ -23,6 +23,10 @@ Example: launch_nannou_app!(for Model, canvas(width=900, height=900))
                                                          ^^^^^^^^^^ <- this is missing
 "#;
 
+const EXPECTED_LIST_OF_ASSIGNS: &str = r#"Expected a list of assignment expressions in canvas
+Example: launch_nannou_app!(for Model, canvas(width=900, height=900))
+                                              ^^^^^^^^^  ^^^^^^^^^^"#;
+
 /// launch_nannou_app!(for ModelData, canvas(width=900, height=900));
 impl syn::parse::Parse for NannouApp {
     fn parse(input: syn::parse::ParseStream<'_>) -> syn::Result<Self> {
@@ -40,8 +44,8 @@ impl syn::parse::Parse for NannouApp {
             return Err(syn::Error::new(canvas.span(), msg));
         }
 
-        let mut width: Option<LitInt> = None;
-        let mut height: Option<LitInt> = None;
+        let mut width: Option<&LitInt> = None;
+        let mut height: Option<&LitInt> = None;
 
         if let Meta::List(ref canvas) = &canvas {
             let args = canvas
@@ -56,16 +60,22 @@ impl syn::parse::Parse for NannouApp {
                     height = get_lit_int_for_ident("height", arg);
                 }
             }
+
+            let width = width
+                .ok_or(syn::Error::new(canvas.span(), MISSING_WIDTH_MSG))?
+                .to_owned();
+            let height = height
+                .ok_or(syn::Error::new(canvas.span(), MISSING_HEIGHT_MSG))?
+                .to_owned();
+
+            Ok(NannouApp {
+                model,
+                width,
+                height,
+            })
+        } else {
+            Err(syn::Error::new(canvas.span(), EXPECTED_LIST_OF_ASSIGNS))
         }
-
-        let width = width.ok_or(syn::Error::new(canvas.span(), MISSING_WIDTH_MSG))?;
-        let height = height.ok_or(syn::Error::new(canvas.span(), MISSING_HEIGHT_MSG))?;
-
-        Ok(NannouApp {
-            model,
-            width,
-            height,
-        })
     }
 }
 
@@ -80,7 +90,7 @@ impl NannouApp {
     }
 }
 
-fn get_lit_int_for_ident(ident: &'static str, expr: &ExprAssign) -> Option<LitInt> {
+fn get_lit_int_for_ident<'a>(ident: &'static str, expr: &'a ExprAssign) -> Option<&'a LitInt> {
     match expr.left.as_ref() {
         Expr::Path(p) if p.path.is_ident(ident) => {
             if let Expr::Lit(syn::ExprLit {
@@ -88,7 +98,7 @@ fn get_lit_int_for_ident(ident: &'static str, expr: &ExprAssign) -> Option<LitIn
                 ..
             }) = expr.right.as_ref()
             {
-                Some(value.clone())
+                Some(value)
             } else {
                 None
             }
