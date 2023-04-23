@@ -81,21 +81,18 @@ impl NannouApp {
 }
 
 fn get_lit_int_for_ident(ident: &'static str, expr: &ExprAssign) -> Option<LitInt> {
-    if let Expr::Path(ref path) = *expr.left {
-        if path.path.is_ident(ident) {
+    match expr.left.as_ref() {
+        Expr::Path(p) if p.path.is_ident(ident) => {
             if let Expr::Lit(syn::ExprLit {
                 lit: syn::Lit::Int(ref value),
                 ..
-            }) = *expr.right
+            }) = expr.right.as_ref()
             {
                 Some(value.clone())
             } else {
                 None
             }
-        } else {
-            None
         }
-    } else {
-        None
+        _ => None,
     }
 }
