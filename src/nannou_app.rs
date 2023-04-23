@@ -1,6 +1,6 @@
 use nannou::prelude::*;
 
-use crate::draw::{Canvas, Drawable};
+use crate::draw::Drawable;
 
 /// This is the trait that the application would implement so the drawings
 /// can be put into the canvas via the Nannou framework.
@@ -11,29 +11,26 @@ pub trait Model {
     fn get_drawings(&self) -> &[Box<dyn Drawable>];
     /// Called to update the model for each frame drawing.
     fn update(&mut self);
-    /// Returns the [Canvas] of the drawing
-    fn canvas(&self) -> &Canvas;
 }
 
 /// Easily setup a custom model for the drawing.  The model needs to
 /// implement the [Model] trait.
-pub fn setup<M>()
+pub fn launch<M, const W: u32, const H: u32>()
 where
     M: Model + 'static,
 {
-    nannou::app(create_model::<M>).update(update).run();
+    nannou::app(create_model::<M, W, H>).update(update).run();
 }
 
-fn create_model<M>(app: &App) -> M
+fn create_model<M, const W: u32, const H: u32>(app: &App) -> M
 where
     M: Model + 'static,
 {
     let model = M::create();
-    let canvas = model.canvas();
 
     app.new_window()
         .title(app.exe_name().unwrap())
-        .size(canvas.width(), canvas.height())
+        .size(W, H)
         .view(view::<M>)
         .build()
         .unwrap();

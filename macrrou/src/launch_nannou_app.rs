@@ -90,7 +90,7 @@ impl NannouApp {
 
             fn view(app: &nannou::app::App, model: &#model, frame: nannou::frame::Frame)
             {
-                use micrrou::setup::Model;
+                use micrrou::nannou_app::Model;
 
                 let draw = app.draw();
                 for object in model.get_drawings() {
