@@ -1,6 +1,6 @@
 use nannou::prelude::*;
 
-use crate::controller::mouse;
+use crate::controller::{keyboard, mouse};
 use crate::draw::Drawable;
 
 /// This is the trait that the application would implement so the drawings
@@ -17,6 +17,9 @@ pub trait Model {
 
     /// Implement to handle mouse events.  The default is to do nothing
     fn mouse_event(&mut self, _app: &App, _event: mouse::Event) {}
+
+    /// Implement this to handle keyboard events.  The default is to do nothing.
+    fn key_event(&mut self, _app: &App, _event: keyboard::Event) {}
 }
 
 /// Easily setup a custom model for the drawing.  The model needs to
@@ -41,6 +44,8 @@ where
         .mouse_pressed::<M>(mouse::pressed_handler)
         .mouse_released::<M>(mouse::released_handler)
         .mouse_wheel::<M>(mouse::wheel_handler)
+        .key_pressed::<M>(keyboard::pressed_handler)
+        .key_released::<M>(keyboard::released_handler)
         .build()
         .unwrap();
 

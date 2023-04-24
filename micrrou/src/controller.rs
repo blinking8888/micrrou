@@ -47,3 +47,28 @@ pub mod mouse {
         }
     }
 }
+
+/// Module that provides interface to keyboard events
+pub mod keyboard {
+    pub use nannou::prelude::Key;
+    use nannou::prelude::*;
+
+    use crate::nannou_app::Model;
+
+    #[derive(Debug)]
+    /// Keyboard event types
+    pub enum Event {
+        /// A key was pressed
+        Pressed(Key),
+        /// A key was released
+        Released(Key),
+    }
+
+    pub(crate) fn pressed_handler<M: Model>(app: &App, model: &mut M, key: Key) {
+        model.key_event(app, Event::Pressed(key));
+    }
+
+    pub(crate) fn released_handler<M: Model>(app: &App, model: &mut M, key: Key) {
+        model.key_event(app, Event::Released(key));
+    }
+}
