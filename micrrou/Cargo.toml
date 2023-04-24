@@ -24,6 +24,9 @@ name = "blank_canvas"
 name = "use_launch_nannou_app_macro"
 required-features = ["macro"]
 
+[[example]]
+name = "mouse"
+
 [features]
 
 default = []
