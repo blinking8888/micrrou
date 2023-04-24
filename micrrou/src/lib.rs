@@ -12,6 +12,7 @@ pub mod nannou_app;
 
 /// Typical symbols that you'd want to include from this crate
 pub mod prelude {
+    pub use crate::controller::keyboard::{self, Event as KeyEvent, Key};
     pub use crate::controller::mouse::{self, Button as MouseButton, Event as MouseEvent};
     pub use crate::draw::{self, *};
     pub use crate::nannou_app::{self, *};

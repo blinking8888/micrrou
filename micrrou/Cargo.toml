@@ -27,6 +27,9 @@ required-features = ["macro"]
 [[example]]
 name = "mouse"
 
+[[example]]
+name = "keyboard"
+
 [features]
 
 default = []
