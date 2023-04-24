@@ -1,5 +1,6 @@
 use nannou::prelude::*;
 
+use crate::controller::mouse;
 use crate::draw::Drawable;
 
 /// This is the trait that the application would implement so the drawings
@@ -7,10 +8,15 @@ use crate::draw::Drawable;
 pub trait Model {
     /// Constructor for the Model
     fn create() -> Self;
+
     /// Returns a slice of the drawable objects
     fn get_drawings(&self) -> &[Box<dyn Drawable>];
+
     /// Called to update the model for each frame drawing.
     fn update(&mut self);
+
+    /// Implement to handle mouse events.  The default is to do nothing
+    fn mouse_event(&mut self, _app: &App, _event: mouse::Event) {}
 }
 
 /// Easily setup a custom model for the drawing.  The model needs to
@@ -32,6 +38,9 @@ where
         .title(app.exe_name().unwrap())
         .size(W, H)
         .view(view::<M>)
+        .mouse_pressed::<M>(mouse::pressed_handler)
+        .mouse_released::<M>(mouse::released_handler)
+        .mouse_wheel::<M>(mouse::wheel_handler)
         .build()
         .unwrap();
 
