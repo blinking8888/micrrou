@@ -1,3 +1,5 @@
+use std::slice::Iter;
+
 use nannou::prelude::*;
 
 use crate::controller::{keyboard, mouse};
@@ -10,7 +12,7 @@ pub trait Model {
     fn create() -> Self;
 
     /// Returns a slice of the drawable objects
-    fn get_drawings(&self) -> &[Box<dyn Drawable>];
+    fn get_drawings(&self) -> Iter<'_, Box<dyn Drawable>>;
 
     /// Called to update the model for each frame drawing.
     fn update(&mut self);

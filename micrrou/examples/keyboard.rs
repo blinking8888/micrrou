@@ -1,3 +1,5 @@
+use std::slice::Iter;
+
 /// This is a simple mouse handling controls that logs the mouse events and stats on the console
 use micrrou::prelude::*;
 
@@ -13,8 +15,8 @@ impl Model for KeyEventHandlerModel {
         KeyEventHandlerModel::default()
     }
 
-    fn get_drawings(&self) -> &[Box<dyn Drawable>] {
-        self.drawings.as_slice()
+    fn get_drawings<'a>(&'a self) -> Iter<'a, Box<dyn Drawable>> {
+        self.drawings.iter()
     }
 
     fn update(&mut self) {}
