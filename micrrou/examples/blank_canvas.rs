@@ -1,3 +1,5 @@
+use std::slice::Iter;
+
 use micrrou::prelude::*;
 
 struct MyModel {
@@ -13,8 +15,8 @@ impl Model for MyModel {
         }
     }
 
-    fn get_drawings(&self) -> &[Box<dyn Drawable>] {
-        &self.drawings
+    fn get_drawings<'a>(&'a self) -> Iter<'a, Box<dyn Drawable>> {
+        self.drawings.iter()
     }
 
     fn update(&mut self) {

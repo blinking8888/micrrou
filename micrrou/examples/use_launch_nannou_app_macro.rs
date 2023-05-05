@@ -1,3 +1,5 @@
+use std::slice::Iter;
+
 use micrrou::launch_nannou_app;
 use micrrou::{nannou_app::Model, prelude::Drawable};
 
@@ -18,8 +20,8 @@ impl Model for ModelData {
         Self::default()
     }
 
-    fn get_drawings(&self) -> &[Box<dyn Drawable>] {
-        &self.drawings
+    fn get_drawings(&self) -> Iter<'_, Box<dyn Drawable>> {
+        self.drawings.iter()
     }
 
     fn update(&mut self) {}
