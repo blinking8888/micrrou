@@ -16,13 +16,13 @@ rust-version = "1.60"
 [dependencies]
 nannou = "0.18"
 readonly = "0.2"
-ang = "0.5.0"
+ang = "0.5"
 rand = "0.8"
-num-traits = "0.2.15"
-macrrou = { version = "0.1.0", path = "../macrrou", optional = true }
+num-traits = "0.2"
+macrrou = { version = "0.1", path = "../macrrou", optional = true }
 
 [dev-dependencies]
-test-case = "1.1.0"
+test-case = "1.1"
 
 [[example]]
 name = "blank_canvas"
