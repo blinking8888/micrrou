@@ -1,7 +1,3 @@
-/target
-Cargo.lock
-
-/macrrou/target
-/macrrou/Cargo.lock
-
-old-src
+/target/
+*/target
+*Cargo.lock
