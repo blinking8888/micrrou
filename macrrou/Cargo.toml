@@ -1,14 +1,14 @@
 [package]
 name = "macrrou"
 description = "A procedural macro companion to micrrou"
-repository = "https://github.com/blinking8888/micrrou"
-readme = "README.md"
-keywords = [ "graphics", "generative art", "drawing", "image" ]
-categories = [ "api-bindings", "graphics", "multimedia"  ]
-license = "MIT"
-version = "0.1.0"
-edition = "2021"
-rust-version = "1.60"
+repository.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+license.workspace = true
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

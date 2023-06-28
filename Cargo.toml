@@ -4,6 +4,16 @@ members = [
   "macrrou"
 ]
 
-# I don't know why but this needs to be here to build.
-# Each of the workspace members have 'edition="2021"' already.
+# Use resolver "2" as recommended in building `wgpu-hal` package
 resolver = "2"
+
+[workspace.package]
+repository = "https://github.com/blinking8888/micrrou/"
+readme = "README.md"
+keywords = [ "graphics", "generative art", "drawing", "image" ]
+categories = [ "api-bindings", "graphics", "multimedia"  ]
+license = "MIT"
+edition = "2021"
+rust-version = "1.60"
+version = "0.1.0"
+
